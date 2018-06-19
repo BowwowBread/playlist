@@ -6,7 +6,6 @@ const api = new Router();
 
 
 api.get('/', (ctx) => {
-  console.log('user', ctx.req.user);
   ctx.body = 'home';
 });
 api.use('/auth', auth.routes());

@@ -6,4 +6,3 @@ import registerServiceWorker from 'registerServiceWorker';
 
 ReactDOM.render(<Root />, document.getElementById('root'));
 registerServiceWorker();
-

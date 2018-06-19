@@ -5,8 +5,8 @@ import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
 import session from 'koa-session';
 import passport from 'koa-passport';
+import cors from 'koa-cors';
 import auth from './lib/auth';
-import { jwtMiddleware } from './lib/token';
 
 // const { jwtMiddleware } = require('./lib/token');
 
@@ -19,18 +19,14 @@ const {
 const app = new Koa();
 const router = new Router();
 
-passport.serializeUser((user, done) => {
-  return done(null, user);
-});
+passport.serializeUser((user, done) => done(null, user));
 
-passport.deserializeUser((user, done) => {
-  return done(null, user);
-});
+passport.deserializeUser((user, done) => done(null, user));
 
 app.keys = ['secret'];
 
 app
-  .use(jwtMiddleware)
+  .use(cors())
   .use(bodyParser())
   .use(session({}, app))
   .use(passport.initialize())

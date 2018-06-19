@@ -7,6 +7,14 @@
       "arrow-body-style": 0,
       "import/no-unresolved": 0,
       "import/extensions": 0,
-      "no-undef": 0
+      "no-undef": 0,
+      "import/prefer-default-export": 0,
+      "react/prop-types": 0,
+      "no-unused-vars": 0,
+      "no-restricted-globals": 0,
+      "prefer-template": 0,
+      "no-underscore-dangle": 0,
+      "no-useless-constructor": 0,
+      "max-len": 0
     }
   }

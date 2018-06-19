@@ -1,10 +1,18 @@
-// @flow
-
 import React from 'react';
-import App from 'components/App';
+import { MainPage } from 'pages';
+import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
+import App from './components/App';
+
+import store from './store';
 
 const Root = () => (
-  <App />
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>
 );
 
 export default Root;

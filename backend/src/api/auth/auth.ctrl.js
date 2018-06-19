@@ -9,40 +9,47 @@ const callback = async (ctx) => {
       const userInfo = {
         name: user.name,
         email: user.email,
-        photo: user.photo
+        photo: user.photo,
       };
       const token = await jwt.generateToken(userInfo);
+      console.log('token', token);
       ctx
         .cookies
         .set('token', token, {
-          httpOnly: true,
+          httpOnly: false,
           maxAge: 1000 * 60 * 60 * 24 * 7
         });
-      ctx.redirect('/api');
+      ctx.redirect('http://localhost:3000');
     }
   })(ctx);
 };
 
 const logout = async (ctx) => {
-  ctx
-    .cookies
-    .set('token', null, {
-      maxAge: 0,
-      httpOnly: true
-    });
   ctx.status = 204;
 };
 
-const check = (ctx) => {
-  const { user } = ctx.req;
+const getUser = (ctx) => {
+  const { name, email, photo } = ctx.req.user;
 
-  if (!user) {
+  if (!ctx.req.user) {
     ctx.status = 403;
     return;
   }
-
-  ctx.body = user;
+  const userInfo = {
+    name,
+    email,
+    photo
+  };
+  ctx.body = userInfo;
 };
+
+const check = (ctx) => {
+  const { token } = ctx.req;
+
+  ctx.body = token;
+};
+
 exports.callback = callback;
 exports.logout = logout;
+exports.getUser = getUser;
 exports.check = check;

@@ -29,39 +29,39 @@ function decodeToken(token) {
   });
 }
 
-const jwtMiddleware = async (ctx, next) => {
-  const token = ctx
-    .cookies
-    .get('token'); // read token from ctx
+const checkToken = async (ctx, next) => {
+  let token = ctx.req.headers.authorization;
   if (!token) {
-    return next();
+    ctx.status = 403;
+    ctx.body = 'not token';
   }
   try {
     const decoded = await decodeToken(token); // decoding token
     if ((Date.now() / 1000) - decoded.iat > 60 * 60 * 24) {
       // regenerate
       const { name, email, photo } = decoded;
-      const freshToken = await generateToken({
+      token = await generateToken({
         name,
         email,
         photo
       }, 'userInfo');
-      ctx
-        .cookies
-        .set('token', freshToken, {
-          maxAge: 1000 * 60 * 60 * 24 * 7, // 7days
-          httpOnly: true
-        });
     }
 
-    // ctx.request.user 에 디코딩된 값을 넣어줍니다
+    ctx
+      .cookies
+      .set('token', token, {
+        httpOnly: false,
+        maxAge: 1000 * 60 * 60 * 24 * 7
+      });
+    ctx.req.token = token;
     ctx.req.user = decoded;
   } catch (e) {
     // token validate 실패
     ctx.req.user = null;
+    ctx.body = e;
   }
   return next();
 };
 
 exports.generateToken = generateToken;
-exports.jwtMiddleware = jwtMiddleware;
+exports.checkToken = checkToken;
