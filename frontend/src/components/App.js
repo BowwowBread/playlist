@@ -5,8 +5,7 @@ import Cookies from 'universal-cookie';
 import { MainPage, MyPlayListPage } from 'pages';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as authActions from 'store/modules/auth';
-import { check } from 'lib/api/auth';
+import * as userActions from 'store/modules/user';
 import { getPlayList } from 'lib/api/youtube';
 
 class App extends Component {
@@ -15,8 +14,8 @@ class App extends Component {
   async componentWillMount() {
     const cookies = new Cookies();
     const token = cookies.get('token');
-    const { AuthActions } = this.props;
-    await AuthActions.getUser(token);
+    const { UserActions } = this.props;
+    await UserActions.getUser(token);
   }
 
   render() {
@@ -35,9 +34,9 @@ class App extends Component {
 
 export default connect(
   state => ({
-    userInfo: state.auth.get('userInfo'),
+    userInfo: state.user.get('userInfo'),
   }),
   dispatch => ({
-    AuthActions: bindActionCreators(authActions, dispatch),
+    UserActions: bindActionCreators(userActions, dispatch),
   }),
 )(App);

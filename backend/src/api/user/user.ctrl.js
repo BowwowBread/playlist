@@ -4,7 +4,7 @@ import jwt from '../../lib/token';
 const callback = async (ctx) => {
   await passport.authenticate('google', async (err, user) => {
     if (user === false) {
-      ctx.redirect('/api/auth/fail');
+      ctx.redirect('/api/user/sign/fail');
     } else {
       const userInfo = {
         name: user.name,
@@ -13,7 +13,6 @@ const callback = async (ctx) => {
         accessToken: user.accessToken
       };
       const token = await jwt.generateToken(userInfo);
-      console.log('token', token);
       ctx
         .cookies
         .set('token', token, {
@@ -26,7 +25,6 @@ const callback = async (ctx) => {
 };
 
 const logout = async (ctx) => {
-  console.log(ctx.cookies.get('token'));
   ctx
     .cookies
     .set('token', null, {
@@ -51,7 +49,6 @@ const getUser = (ctx) => {
 };
 
 const check = (ctx) => {
-  console.log(ctx.req.user);
   const { accessToken } = ctx.req.user;
 
   ctx.body = accessToken;

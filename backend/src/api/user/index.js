@@ -1,16 +1,16 @@
 import Router from 'koa-router';
 import passport from 'koa-passport';
-import authCtrl from './auth.ctrl';
+import userCtrl from './user.ctrl';
 import { checkToken } from '../../lib/token';
 
-const auth = new Router();
+const user = new Router();
 
-auth.get('/sign', passport.authenticate('google', {
+user.get('/sign', passport.authenticate('google', {
   scope: ['https://www.googleapis.com/auth/plus.login', 'https://www.googleapis.com/auth/plus.profile.emails.read', 'https://www.googleapis.com/auth/youtube', 'https://www.googleapis.com/auth/youtube.readonly', 'https://www.googleapis.com/auth/youtubepartner-channel-audit']
 }));
-auth.get('/callback', authCtrl.callback);
-auth.get('/logout', checkToken, authCtrl.logout);
-auth.get('/me', checkToken, authCtrl.getUser);
-auth.get('/', checkToken, authCtrl.check);
+user.get('/sign/callback', userCtrl.callback);
+user.get('/logout', checkToken, userCtrl.logout);
+user.get('/me', checkToken, userCtrl.getUser);
+user.get('/', checkToken, userCtrl.check);
 
-module.exports = auth;
+module.exports = user;

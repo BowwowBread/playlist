@@ -1,5 +1,5 @@
 import Router from 'koa-router';
-import auth from './auth';
+import user from './user';
 import playlist from './playlist';
 
 const api = new Router();
@@ -8,7 +8,7 @@ const api = new Router();
 api.get('/', (ctx) => {
   ctx.body = 'home';
 });
-api.use('/auth', auth.routes());
+api.use('/user', user.routes());
 api.use('/playlist', playlist.routes());
 
 

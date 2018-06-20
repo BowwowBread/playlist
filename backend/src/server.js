@@ -6,18 +6,27 @@ import bodyParser from 'koa-bodyparser';
 import session from 'koa-session';
 import passport from 'koa-passport';
 import cors from 'koa-cors';
+import mongoose from 'mongoose';
 import auth from './lib/auth';
-
-// const { jwtMiddleware } = require('./lib/token');
 
 const api = require('./api');
 
 const {
-  PORT: port = 3001
+  PORT: port = 3001,
+  MONGO_URI,
 } = process.env;
 
 const app = new Koa();
 const router = new Router();
+
+mongoose.Promise = global.Promise;
+mongoose.connect(MONGO_URI)
+  .then((response) => {
+    console.log('success connect mongoDB');
+  })
+  .catch((error) => {
+    console.log(`fail connect mongoDB error : ${ error}`);
+  });
 
 passport.serializeUser((user, done) => done(null, user));
 

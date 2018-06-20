@@ -5,7 +5,7 @@ import { getPlaylist } from 'lib/api/youtube';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookies from 'universal-cookie';
-import * as authActions from 'store/modules/auth';
+import * as userActions from 'store/modules/user';
 
 class HeaderContainer extends Component {
   state = {
@@ -25,14 +25,14 @@ class HeaderContainer extends Component {
   };
 
   login = () => {
-    const baseURI = location.protocol + '//' + location.hostname + ':' + 3001 + '/api/auth/sign';
+    const baseURI = location.protocol + '//' + location.hostname + ':' + 3001 + '/api/user/sign';
     location.href = `${baseURI}`;
   }
 
   logout = async () => {
-    const { AuthActions } = this.props;
+    const { UserActions } = this.props;
     const cookies = new Cookies();
-    await AuthActions.logout();
+    await UserActions.logout();
     cookies.remove('token');
     this.props.history.push('/');
     console.log('logout');
@@ -65,10 +65,10 @@ class HeaderContainer extends Component {
 
 export default withRouter(connect(
   state => ({
-    userInfo: state.auth.get('userInfo'),
-    isLogin: state.auth.get('isLogin'),
+    userInfo: state.user.get('userInfo'),
+    isLogin: state.user.get('isLogin'),
   }),
   dispatch => ({
-    AuthActions: bindActionCreators(authActions, dispatch),
+    UserActions: bindActionCreators(userActions, dispatch),
   }),
 )(HeaderContainer));

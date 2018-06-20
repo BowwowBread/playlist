@@ -1,13 +1,13 @@
 import { createAction, handleActions } from 'redux-actions';
 import { Map, toJS, fromJS } from 'immutable';
 import { pender } from 'redux-pender';
-import * as authApi from 'lib/api/auth';
+import * as userApi from 'lib/api/user';
 
-const GET_USER = 'auth/GET_USER';
-const LOGOUT = 'auth/LOGOUT';
+const GET_USER = 'user/GET_USER';
+const LOGOUT = 'user/LOGOUT';
 
-export const getUser = createAction(GET_USER, authApi.getUser);
-export const logout = createAction(LOGOUT, authApi.logout);
+export const getUser = createAction(GET_USER, userApi.getUser);
+export const logout = createAction(LOGOUT, userApi.logout);
 
 const initialState = Map({
   userInfo: Map({

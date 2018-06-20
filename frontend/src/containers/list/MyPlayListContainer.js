@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
-import { check } from 'lib/api/auth';
-import { getPlayList } from 'lib/api/youtube';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as playListActions from 'store/modules/playlist';
