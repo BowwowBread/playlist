@@ -1,11 +1,9 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import Drawer from '@material-ui/core/Drawer';
-import Hidden from '@material-ui/core/Hidden';
-import Divider from '@material-ui/core/Divider';
 import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
+import { Drawer, Hidden, Divider, List } from '@material-ui/core';
 import MenuItem from './MenuItem';
+
 
 const drawerWidth = 240;
 

@@ -39,11 +39,14 @@ const checkToken = async (ctx, next) => {
     const decoded = await decodeToken(token); // decoding token
     if ((Date.now() / 1000) - decoded.iat > 60 * 60 * 24) {
       // regenerate
-      const { name, email, photo } = decoded;
+      const {
+        name, email, photo, accessToken,
+      } = decoded;
       token = await generateToken({
         name,
         email,
-        photo
+        photo,
+        accessToken,
       }, 'userInfo');
     }
 
@@ -53,7 +56,6 @@ const checkToken = async (ctx, next) => {
         httpOnly: false,
         maxAge: 1000 * 60 * 60 * 24 * 7
       });
-    ctx.req.token = token;
     ctx.req.user = decoded;
   } catch (e) {
     // token validate 실패

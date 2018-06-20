@@ -8,6 +8,12 @@ export const getUser = token => authAxios.get('http://localhost:3001/api/auth/me
   },
 });
 
+export const check = token => authAxios.get('http://localhost:3001/api/auth', {
+  headers: {
+    Authorization: token,
+  },
+});
+
 export const logout = token => authAxios.get('http://localhost:3001/api/auth/logout', {
   headers: {
     Authorization: token,

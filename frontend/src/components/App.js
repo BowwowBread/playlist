@@ -2,18 +2,20 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import { MainPage } from 'pages';
+import { MainPage, MyPlayListPage } from 'pages';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as authActions from 'store/modules/auth';
+import { check } from 'lib/api/auth';
+import { getPlayList } from 'lib/api/youtube';
 
 class App extends Component {
   state = {};
 
-  async componentDidMount() {
+  async componentWillMount() {
     const cookies = new Cookies();
     const token = cookies.get('token');
-    const { AuthActions, userInfo } = this.props;
+    const { AuthActions } = this.props;
     await AuthActions.getUser(token);
   }
 
@@ -23,9 +25,8 @@ class App extends Component {
         <Helmet>
           <title>youtube playlist</title>
         </Helmet>
-        <Switch>
-          <Route exact path="/" component={MainPage} />
-        </Switch>
+        <Route exact path="/" component={MainPage} />
+        <Route path="/mylist" component={MyPlayListPage} />
       </div>
     );
   }

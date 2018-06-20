@@ -1,69 +1,66 @@
 import React from 'react';
-import ListItem from '@material-ui/core/ListItem';
-import Divider from '@material-ui/core/Divider';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import HomeIcon from '@material-ui/icons/Home';
-import MusicIcon from '@material-ui/icons/QueueMusic';
-import TrendingIcon from '@material-ui/icons/TrendingUp';
-import GameIcon from '@material-ui/icons/Games';
-import HumorIcon from '@material-ui/icons/ChildCare';
-import EduIcon from '@material-ui/icons/AccountBalance';
-import StarIcon from '@material-ui/icons/Star';
-import MyListIcon from '@material-ui/icons/List';
+import { Link, NavLink } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+import { ListItem, Divider, ListItemIcon, ListItemText, ListSubheader } from '@material-ui/core';
+import { Home, QueueMusic, TrendingUp, Games, ChildCare, AccountBalance, Star, List } from '@material-ui/icons';
 
-const MenuItem = () => {
+const styles = theme => ({
+  active: {
+    backgroundColor: 'rgba(0, 0, 0, 0.1)',
+  },
+});
+
+const MenuItem = ({ classes }) => {
   return (
     <div>
       <Divider />
-      <ListItem button>
+      <ListItem button component={NavLink} to="/">
         <ListItemIcon>
-          <HomeIcon />
+          <Home />
         </ListItemIcon>
         <ListItemText primary="홈" />
       </ListItem>
-      <ListItem button>
+      <ListItem button component={NavLink} to="/trend" activeClassName={classes.active}>
         <ListItemIcon>
-          <TrendingIcon />
+          <TrendingUp />
         </ListItemIcon>
         <ListItemText primary="인기" />
       </ListItem>
       <ListSubheader component="div">카테고리</ListSubheader>
-      <ListItem button>
+      <ListItem button component={NavLink} to="/category/music" activeClassName={classes.active}>
         <ListItemIcon>
-          <MusicIcon />
+          <QueueMusic />
         </ListItemIcon>
         <ListItemText primary="음악" />
       </ListItem>
-      <ListItem button>
+      <ListItem button component={NavLink} to="/category/game" activeClassName={classes.active}>
         <ListItemIcon>
-          <GameIcon />
+          <Games />
         </ListItemIcon>
         <ListItemText primary="게임" />
       </ListItem>
-      <ListItem button>
+      <ListItem button component={NavLink} to="/category/humor" activeClassName={classes.active}>
         <ListItemIcon>
-          <HumorIcon />
+          <ChildCare />
         </ListItemIcon>
         <ListItemText primary="유머" />
       </ListItem>
-      <ListItem button>
+      <ListItem button component={NavLink} to="/category/edu" activeClassName={classes.active}>
         <ListItemIcon>
-          <EduIcon />
+          <AccountBalance />
         </ListItemIcon>
         <ListItemText primary="교육" />
       </ListItem>
       <ListSubheader component="div">내 라이브러리</ListSubheader>
-      <ListItem button>
+      <ListItem button component={NavLink} to="/mylist" activeClassName={classes.active}>
         <ListItemIcon>
-          <MyListIcon />
+          <List />
         </ListItemIcon>
         <ListItemText primary="내 재생목록" />
       </ListItem>
-      <ListItem button>
+      <ListItem button component={NavLink} to="/like" activeClassName={classes.active}>
         <ListItemIcon>
-          <StarIcon />
+          <Star />
         </ListItemIcon>
         <ListItemText primary="즐겨찾기" />
       </ListItem>
@@ -71,4 +68,4 @@ const MenuItem = () => {
   );
 };
 
-export default MenuItem;
+export default withStyles(styles)(MenuItem);

@@ -46,9 +46,7 @@ class PageLayout extends Component {
           <SideMenuContainer mobileOpen={mobileOpen} handleSideMenu={handleSideMenu} />
           <main className={classes.content}>
             <div className={classes.toolbar} />
-            test
-            test
-            test
+            {children}
           </main>
         </div>
       </div>

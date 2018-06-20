@@ -10,6 +10,7 @@ const callback = async (ctx) => {
         name: user.name,
         email: user.email,
         photo: user.photo,
+        accessToken: user.accessToken
       };
       const token = await jwt.generateToken(userInfo);
       console.log('token', token);
@@ -25,6 +26,12 @@ const callback = async (ctx) => {
 };
 
 const logout = async (ctx) => {
+  console.log(ctx.cookies.get('token'));
+  ctx
+    .cookies
+    .set('token', null, {
+
+    })
   ctx.status = 204;
 };
 
@@ -44,9 +51,10 @@ const getUser = (ctx) => {
 };
 
 const check = (ctx) => {
-  const { token } = ctx.req;
+  console.log(ctx.req.user);
+  const { accessToken } = ctx.req.user;
 
-  ctx.body = token;
+  ctx.body = accessToken;
 };
 
 exports.callback = callback;
