@@ -48,7 +48,7 @@ const Header = ({
   logout,
 }) => {
   const open = Boolean(anchorEl);
-  const { name, email, photo } = userInfo.toJS();
+  const { name, email, thumbnail } = userInfo.toJS();
   return (
     <AppBar className={classes.appBar}>
       <Toolbar>
@@ -72,7 +72,7 @@ const Header = ({
               >
                 <Avatar
                   alt="profile image"
-                  src={photo}
+                  src={thumbnail}
                   className={classes.avatar}
                 />
               </IconButton>

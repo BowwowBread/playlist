@@ -2,16 +2,17 @@ import { createAction, handleActions } from 'redux-actions';
 import { Map, toJS, fromJS } from 'immutable';
 import { pender } from 'redux-pender';
 import * as userApi from 'lib/api/user';
+import * as authApi from 'lib/api/auth';
 
 const GET_USER = 'user/GET_USER';
 const LOGOUT = 'user/LOGOUT';
 
 export const getUser = createAction(GET_USER, userApi.getUser);
-export const logout = createAction(LOGOUT, userApi.logout);
+export const logout = createAction(LOGOUT, authApi.logout);
 
 const initialState = Map({
   userInfo: Map({
-    name: '', email: '', photo: '',
+    name: '', email: '', thumbnail: '',
   }),
   isLogin: false,
 });
@@ -21,12 +22,12 @@ export default handleActions({
     type: GET_USER,
     onSuccess: (state, action) => {
       const {
-        name, email, photo,
+        name, email, thumbnail,
       } = action.payload.data;
       const userInfo = Map({
         name,
         email,
-        photo,
+        thumbnail,
       });
       return state
         .set('userInfo', userInfo)

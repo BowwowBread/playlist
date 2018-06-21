@@ -3,33 +3,47 @@ import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const User = new Schema({
-  userInfo: {
-    name: String,
-    email: String,
-    thumbnail: String,
-    accessToken: String,
-  }
+  name: String,
+  email: String,
+  thumbnail: String,
+  accessToken: String,
+  refreshToken: String,
+  myPlayList: Array,
 });
 
 User.statics.findByEmail = function (email) {
-  return this.findOne({ email }).exec();
+  return this
+    .findOne({ email })
+    .exec();
 };
 
 User.statics.findByName = function (name) {
-  return this.findOne({ name }).exec();
+  return this
+    .findOne({ name })
+    .exec();
+};
+
+User.statics.updateUser = function ({
+  name, email, thumbnail, accessToken, refreshToken
+}) {
+  console.log('update');
+  return this.findOneAndUpdate({ email }, {
+    $set: {
+      name,
+      thumbnail,
+      accessToken,
+      refreshToken
+    }
+  }).exec();
 };
 
 User.statics.signUp = async function ({
-  name, email, thumbnail, accessToken
+  name, email, thumbnail, accessToken, refreshToken,
 }) {
-  const user = new this({
-    name,
-    email,
-    thumbnail,
-    accessToken,
+  console.log('sign up');
+  return this.create({
+    name, email, thumbnail, accessToken, refreshToken
   });
-
-  return user.save();
 };
 
 module.exports = mongoose.model('User', User);

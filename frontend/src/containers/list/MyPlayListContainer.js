@@ -8,9 +8,9 @@ import MyPlatList from 'components/list/MyPlayList';
 class MyPlayListContainer extends Component {
   state = { }
   async componentWillMount() {
-    const { data: accessToken } = await check(new Cookies().get('token'));
     const { PlayListActions } = this.props;
-    await PlayListActions.fetchMyPlayList(accessToken);
+    const token = new Cookies().get('token');
+    await PlayListActions.fetchMyPlayList(token);
   }
 
   render() {

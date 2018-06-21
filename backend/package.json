@@ -31,6 +31,8 @@
     "koa-session": "^5.8.1",
     "mongoose": "^5.1.6",
     "nodemon": "^1.17.5",
-    "passport-google-oauth2": "^0.1.6"
+    "passport-google-oauth2": "^0.1.6",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
   }
 }

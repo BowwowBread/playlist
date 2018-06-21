@@ -1,8 +1,11 @@
 import Router from 'koa-router';
-import playlistCtrl from './playlist.ctrl';
+import playListCtrl from './playList.ctrl';
+import { checkToken } from '../../lib/token';
+import { checkAccessToken } from '../../lib/auth';
 
-const playlist = new Router();
 
-playlist.get('/');
+const playList = new Router();
 
-module.exports = playlist;
+playList.get('/', checkToken, checkAccessToken, playListCtrl.getPlayList);
+
+module.exports = playList;

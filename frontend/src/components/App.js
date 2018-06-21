@@ -6,7 +6,7 @@ import { MainPage, MyPlayListPage } from 'pages';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from 'store/modules/user';
-import { getPlayList } from 'lib/api/youtube';
+import { getPlayList } from 'lib/api/playList';
 
 class App extends Component {
   state = {};

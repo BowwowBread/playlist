@@ -1,10 +1,9 @@
+require('dotenv').config();
+require('dotenv').config();
+
 const jwtSecret = process.env.JWT_SECRET;
 import jwt from 'jsonwebtoken';
-/**
- * create token
- * @param {any} payload
- * @returns {string} token
- */
+
 function generateToken(payload) {
   return new Promise((resolve, reject) => {
     jwt.sign(payload, jwtSecret, {
@@ -38,15 +37,15 @@ const checkToken = async (ctx, next) => {
   try {
     const decoded = await decodeToken(token); // decoding token
     if ((Date.now() / 1000) - decoded.iat > 60 * 60 * 24) {
-      // regenerate
       const {
-        name, email, photo, accessToken,
+        name, email, thumbnail, accessToken, refreshToken,
       } = decoded;
       token = await generateToken({
         name,
         email,
-        photo,
+        thumbnail,
         accessToken,
+        refreshToken,
       }, 'userInfo');
     }
 
@@ -57,12 +56,13 @@ const checkToken = async (ctx, next) => {
         maxAge: 1000 * 60 * 60 * 24 * 7
       });
     ctx.req.user = decoded;
+    next();
   } catch (e) {
     // token validate 실패
+    console.log('token check error');
     ctx.req.user = null;
     ctx.body = e;
   }
-  return next();
 };
 
 exports.generateToken = generateToken;

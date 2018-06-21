@@ -1,11 +1,11 @@
 import { createAction, handleActions } from 'redux-actions';
 import { Map, toJS, fromJS, List } from 'immutable';
 import { pender } from 'redux-pender';
-import * as youtubeApi from 'lib/api/youtube';
+import * as playListApi from 'lib/api/playList';
 
 const FETCH_MY_PLAYLIST = 'list/FETCH_MY_PLAYLIST';
 
-export const fetchMyPlayList = createAction(FETCH_MY_PLAYLIST, youtubeApi.getPlayList);
+export const fetchMyPlayList = createAction(FETCH_MY_PLAYLIST, playListApi.getPlayList);
 
 const initialState = Map({
   myPlayList: List([

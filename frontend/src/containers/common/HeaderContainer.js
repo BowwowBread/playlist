@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Header from 'components/common/Header';
 import { withRouter } from 'react-router-dom';
-import { getPlaylist } from 'lib/api/youtube';
+import { getPlayList } from 'lib/api/playList';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookies from 'universal-cookie';
@@ -25,7 +25,7 @@ class HeaderContainer extends Component {
   };
 
   login = () => {
-    const baseURI = location.protocol + '//' + location.hostname + ':' + 3001 + '/api/user/sign';
+    const baseURI = location.protocol + '//' + location.hostname + ':' + 3001 + '/api/auth/sign';
     location.href = `${baseURI}`;
   }
 
