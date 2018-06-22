@@ -24,34 +24,19 @@ const styles = theme => ({
   },
 });
 
-class PageLayout extends Component {
-  state = {
-    mobileOpen: false,
-  };
-
-  handleSideMenu = () => {
-    console.log('hi');
-    this.setState({
-      mobileOpen: !this.state.mobileOpen,
-    });
-  };
-  render() {
-    const { mobileOpen } = this.state;
-    const { children, classes, theme } = this.props;
-    const { handleSideMenu } = this;
-    return (
-      <div>
-        <div className={classes.root}>
-          <HeaderContainer mobileOpen={mobileOpen} handleSideMenu={handleSideMenu} />
-          <SideMenuContainer mobileOpen={mobileOpen} handleSideMenu={handleSideMenu} />
-          <main className={classes.content}>
-            <div className={classes.toolbar} />
-            {children}
-          </main>
-        </div>
+const PageLayout = ({ children, classes, theme }) => {
+  return (
+    <div>
+      <div className={classes.root}>
+        <HeaderContainer />
+        <SideMenuContainer />
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          {children}
+        </main>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
 export default withStyles(styles, { withTheme: true })(PageLayout);

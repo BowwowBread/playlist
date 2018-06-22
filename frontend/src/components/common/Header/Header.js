@@ -36,7 +36,7 @@ const styles = theme => ({
   },
 });
 const Header = ({
-  handleSideMenu,
+  toggleMobileSideBar,
   handleMenu,
   handleClose,
   login,
@@ -46,6 +46,7 @@ const Header = ({
   userInfo,
   isLogin,
   logout,
+  mobileSideBar,
 }) => {
   const open = Boolean(anchorEl);
   const { name, email, thumbnail } = userInfo.toJS();
@@ -55,7 +56,7 @@ const Header = ({
         <IconButton
           color="inherit"
           aria-label="open drawer"
-          onClick={handleSideMenu}
+          onClick={toggleMobileSideBar}
           className={classes.navIconHide}
         >
           <MenuIcon />

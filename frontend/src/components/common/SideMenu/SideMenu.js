@@ -24,7 +24,7 @@ const styles = theme => ({
 
 
 const SideMenu = ({
-  mobileOpen, handleSideMenu, classes, theme,
+  mobileSidebar, toggleMobileSidebar, classes, theme,
 }) => {
   return (
     <div>
@@ -32,8 +32,8 @@ const SideMenu = ({
         <Drawer
           variant="temporary"
           anchor="left"
-          open={mobileOpen}
-          onClose={handleSideMenu}
+          open={mobileSidebar}
+          onClose={toggleMobileSidebar}
           classes={{
           paper: classes.drawerPaper,
         }}

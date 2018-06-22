@@ -6,15 +6,12 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookies from 'universal-cookie';
 import * as userActions from 'store/modules/user';
+import * as baseActions from 'store/modules/base';
 
 class HeaderContainer extends Component {
   state = {
     anchorEl: null,
   };
-
-  async componentDidMount() {
-    // const res = await getPlaylist();
-  }
 
   handleMenu = (event) => {
     this.setState({ anchorEl: event.currentTarget });
@@ -23,6 +20,11 @@ class HeaderContainer extends Component {
   handleClose = () => {
     this.setState({ anchorEl: null });
   };
+
+  toggleMobileSideBar = () => {
+    const { BaseActions } = this.props;
+    BaseActions.toggleMobileSidebar();
+  }
 
   login = () => {
     const baseURI = location.protocol + '//' + location.hostname + ':' + 3001 + '/api/auth/sign';
@@ -39,17 +41,18 @@ class HeaderContainer extends Component {
   }
   render() {
     const {
-      handleMenu, handleClose, login, logout,
+      toggleMobileSideBar, handleMenu, handleClose, login, logout,
     } = this;
     const {
-      handleSideMenu, mobileOpen, userInfo, isLogin,
+      userInfo, isLogin, mobileSideBar,
     } = this.props;
     const { anchorEl } = this.state;
 
     return (
       <div>
         <Header
-          handleSideMenu={handleSideMenu}
+          toggleMobileSideBar={toggleMobileSideBar}
+          mobileSideBar={mobileSideBar}
           handleMenu={handleMenu}
           handleClose={handleClose}
           isLogin={isLogin}
@@ -67,8 +70,10 @@ export default withRouter(connect(
   state => ({
     userInfo: state.user.get('userInfo'),
     isLogin: state.user.get('isLogin'),
+    mobileSideBar: state.base.getIn(['mobileSidebar', 'visible']),
   }),
   dispatch => ({
     UserActions: bindActionCreators(userActions, dispatch),
+    BaseActions: bindActionCreators(baseActions, dispatch),
   }),
 )(HeaderContainer));
