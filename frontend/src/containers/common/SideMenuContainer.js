@@ -14,10 +14,10 @@ class SideMenuContainer extends Component {
     BaseActions.toggleMobileSidebar();
   }
   render() {
-    const { mobileSidebar } = this.props;
+    const { mobileSidebar, isLogin } = this.props;
     const { toggleMobileSidebar } = this;
     return (
-      <SideMenu mobileSidebar={mobileSidebar} toggleMobileSidebar={toggleMobileSidebar} />
+      <SideMenu isLogin={isLogin} mobileSidebar={mobileSidebar} toggleMobileSidebar={toggleMobileSidebar} />
     );
   }
 }
@@ -25,6 +25,7 @@ class SideMenuContainer extends Component {
 export default connect(
   state => ({
     mobileSidebar: state.base.getIn(['mobileSidebar', 'visible']),
+    isLogin: state.user.get('isLogin'),
   }),
   dispatch => ({
     BaseActions: bindActionCreators(baseActions, dispatch),

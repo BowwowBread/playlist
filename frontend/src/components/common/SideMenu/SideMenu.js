@@ -24,7 +24,7 @@ const styles = theme => ({
 
 
 const SideMenu = ({
-  mobileSidebar, toggleMobileSidebar, classes, theme,
+  isLogin, mobileSidebar, toggleMobileSidebar, classes, theme,
 }) => {
   return (
     <div>
@@ -40,7 +40,7 @@ const SideMenu = ({
           ModalProps={{ keepMounted: true }}
         >
           <div className={classes.toolbar} />
-          <MenuItem />
+          <MenuItem isLogin={isLogin} />
         </Drawer>
       </Hidden>
       <Hidden smDown implementation="css">
@@ -52,7 +52,7 @@ const SideMenu = ({
         }}
         >
           <div className={classes.toolbar} />
-          <MenuItem />
+          <MenuItem isLogin={isLogin} />
         </Drawer>
       </Hidden>
     </div>

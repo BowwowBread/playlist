@@ -2,17 +2,21 @@ import React, { Component } from 'react';
 import Cookies from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as playListActions from 'store/modules/playlist';
+import * as playListActions from 'store/modules/playList';
 import MyPlatList from 'components/list/MyPlayList';
 
 class MyPlayListContainer extends Component {
   state = { }
-  async componentWillMount() {
+  async componentDidMount() {
     const { PlayListActions } = this.props;
     const token = new Cookies().get('token');
-    await PlayListActions.fetchMyPlayList(token);
+    await PlayListActions.getMyPlayList(token);
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('shouldComponentUpdate: ' + JSON.stringify(nextProps) + ' ' + JSON.stringify(nextState));
+    return true;
+  }
   render() {
     const { myPlayList } = this.props;
     return (
@@ -25,7 +29,7 @@ class MyPlayListContainer extends Component {
 
 export default connect(
   state => ({
-    myPlayList: state.playlist.get('myPlayList'),
+    myPlayList: state.playList.get('myPlayList'),
   }),
   dispatch => ({
     PlayListActions: bindActionCreators(playListActions, dispatch),

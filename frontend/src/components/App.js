@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import { MainPage, MyPlayListPage } from 'pages';
+import { HomePage, MyPlayListPage } from 'pages';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from 'store/modules/user';
-import { getPlayList } from 'lib/api/playList';
 
 class App extends Component {
   state = {};
@@ -24,7 +23,7 @@ class App extends Component {
         <Helmet>
           <title>youtube playlist</title>
         </Helmet>
-        <Route exact path="/" component={MainPage} />
+        <Route exact path="/" component={HomePage} />
         <Route path="/mylist" component={MyPlayListPage} />
       </div>
     );

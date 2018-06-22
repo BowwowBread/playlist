@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Header from 'components/common/Header';
 import { withRouter } from 'react-router-dom';
-import { getPlayList } from 'lib/api/playList';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import Cookies from 'universal-cookie';

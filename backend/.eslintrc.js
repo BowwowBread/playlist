@@ -32,6 +32,7 @@ module.exports = {
     'import/no-extraneous-dependencies': 0,
     'import/first': 0,
     'require-yield': 0,
-    "prefer-arrow-callback": 0
+    "prefer-arrow-callback": 0,
+    "dot-notation": 0,
   }
 };

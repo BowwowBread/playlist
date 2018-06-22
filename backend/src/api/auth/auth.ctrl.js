@@ -8,13 +8,13 @@ const callback = async (ctx) => {
     if (user === false) {
       ctx.redirect('/api/user/sign/fail');
     } else {
+      // 유저 검색 -> 성공 시 업데이트, 실패시 생성
       const userInfo = await User.findByEmail(user.email)
         ? await User.updateUser({
           name: user.name,
           email: user.email,
           thumbnail: user.thumbnail,
           accessToken: user.accessToken,
-          refreshToken: user.refreshToken
         })
         : await User.signUp({
           name: user.name,
@@ -27,8 +27,6 @@ const callback = async (ctx) => {
         name: userInfo.name,
         email: userInfo.email,
         thumbnail: userInfo.thumbnail,
-        accessToken: userInfo.accessToken,
-        refreshToken: userInfo.refreshToken
       });
       ctx
         .cookies

@@ -10,7 +10,52 @@ const styles = theme => ({
   },
 });
 
-const MenuItem = ({ classes }) => {
+const GuestMenu = ({ classes }) => {
+  return (
+    <div>
+      <Divider />
+      <ListItem button component={NavLink} to="/">
+        <ListItemIcon>
+          <Home />
+        </ListItemIcon>
+        <ListItemText primary="홈" />
+      </ListItem>
+      <ListItem button component={NavLink} to="/trend" activeClassName={classes.active}>
+        <ListItemIcon>
+          <TrendingUp />
+        </ListItemIcon>
+        <ListItemText primary="인기" />
+      </ListItem>
+      <ListSubheader component="div">카테고리</ListSubheader>
+      <ListItem button component={NavLink} to="/category/music" activeClassName={classes.active}>
+        <ListItemIcon>
+          <QueueMusic />
+        </ListItemIcon>
+        <ListItemText primary="음악" />
+      </ListItem>
+      <ListItem button component={NavLink} to="/category/game" activeClassName={classes.active}>
+        <ListItemIcon>
+          <Games />
+        </ListItemIcon>
+        <ListItemText primary="게임" />
+      </ListItem>
+      <ListItem button component={NavLink} to="/category/humor" activeClassName={classes.active}>
+        <ListItemIcon>
+          <ChildCare />
+        </ListItemIcon>
+        <ListItemText primary="유머" />
+      </ListItem>
+      <ListItem button component={NavLink} to="/category/edu" activeClassName={classes.active}>
+        <ListItemIcon>
+          <AccountBalance />
+        </ListItemIcon>
+        <ListItemText primary="교육" />
+      </ListItem>
+    </div>
+  );
+};
+
+const UserMenu = ({ classes }) => {
   return (
     <div>
       <Divider />
@@ -66,6 +111,10 @@ const MenuItem = ({ classes }) => {
       </ListItem>
     </div>
   );
+};
+
+const MenuItem = ({ isLogin, classes }) => {
+  return isLogin ? <UserMenu classes={classes} /> : <GuestMenu classes={classes} />;
 };
 
 export default withStyles(styles)(MenuItem);

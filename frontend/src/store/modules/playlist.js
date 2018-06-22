@@ -3,9 +3,10 @@ import { Map, toJS, fromJS, List } from 'immutable';
 import { pender } from 'redux-pender';
 import * as playListApi from 'lib/api/playList';
 
-const FETCH_MY_PLAYLIST = 'list/FETCH_MY_PLAYLIST';
 
-export const fetchMyPlayList = createAction(FETCH_MY_PLAYLIST, playListApi.getPlayList);
+const GET_MY_PLAYLIST = 'list/GET_MY_PLAYLIST';
+
+export const getMyPlayList = createAction(GET_MY_PLAYLIST, playListApi.getMyPlayList);
 
 const initialState = Map({
   myPlayList: List([
@@ -23,7 +24,7 @@ const initialState = Map({
 
 export default handleActions({
   ...pender({
-    type: FETCH_MY_PLAYLIST,
+    type: GET_MY_PLAYLIST,
     onSuccess: (state, action) => {
       const { data } = action.payload;
       const playList = List(data.items.map((item, i) => {

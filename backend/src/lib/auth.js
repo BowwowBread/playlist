@@ -38,7 +38,6 @@ const getTokenInfo = async (accessToken) => {
 
 const refreshingAccessToken = async (refreshToken) => {
   const { clientID, clientSecret } = process.env;
-  console.log(refreshToken);
   const options = {
     method: 'POST',
     uri: 'https://www.googleapis.com/oauth2/v4/token',
@@ -55,9 +54,8 @@ const refreshingAccessToken = async (refreshToken) => {
   };
   try {
     const refreshAccessToken = await request(options);
-    console.log('3', refreshAccessToken);
-    console.log('refresh access token', refreshAccessToken.access_token);
-    return refreshAccessToken;
+    console.log(refreshAccessToken.access_token);
+    return refreshAccessToken.access_token;
   } catch (e) {
     return e;
   }
@@ -69,24 +67,21 @@ const checkAccessToken = async (ctx, next) => {
   } = ctx.req.user;
 
   try {
-    // check token info
+    // 토큰 정보 체크
     await getTokenInfo(accessToken);
   } catch (e) {
-    // expire access token
+    // 만료된 토큰일 경우 재발급 -> db, cookie 업데이트
     const refreshAccessToken = await refreshingAccessToken(refreshToken);
     const userInfo = await User.updateUser({
       name,
       email,
       thumbnail,
       accessToken: refreshAccessToken,
-      refreshToken
     });
     const token = await jwt.generateToken({
       name: userInfo.name,
       email: userInfo.email,
       thumbnail: userInfo.thumbnail,
-      accessToken: userInfo.accessToken,
-      refreshToken: userInfo.refreshToken
     });
     ctx.req.user.accessToken = refreshAccessToken;
     ctx

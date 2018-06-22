@@ -24,7 +24,7 @@ User.statics.findByName = function (name) {
 };
 
 User.statics.updateUser = function ({
-  name, email, thumbnail, accessToken, refreshToken
+  name, email, thumbnail, accessToken,
 }) {
   console.log('update');
   return this.findOneAndUpdate({ email }, {
@@ -32,7 +32,6 @@ User.statics.updateUser = function ({
       name,
       thumbnail,
       accessToken,
-      refreshToken
     }
   }).exec();
 };

@@ -59,10 +59,15 @@ const MyList = ({ classes, myPlayList }) => {
         </TableHead>
         <TableBody>
           {myPlayList.map((playList, index) => {
-            console.log(playList);
             const key = index;
             const src = `http://www.youtube.com/embed?listType=playlist&list=${playList.get('id')}&autoplay=1`;
-            const date = new Date(playList.get('date'));
+            let date = '';
+            if (playList.get('date') === '') {
+              date = '';
+            } else {
+              date = new Date(playList.get('date'));
+              date = date.getFullYear() + '년' + date.getMonth() + '월' + date.getDate() + '일';
+            }
             return (
               <TableRow key={key}>
                 <TableCell style={{ textAlign: 'center' }}>
@@ -77,7 +82,7 @@ const MyList = ({ classes, myPlayList }) => {
                 </TableCell>
                 <TableCell style={{ textAlign: 'center' }}>{playList.get('title')}</TableCell>
                 <TableCell style={{ textAlign: 'center' }}>{playList.get('description')}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{date.getFullYear() + '년' + date.getMonth() + '월' + date.getDate() + '일'}</TableCell>
+                <TableCell style={{ textAlign: 'center' }}>{date}</TableCell>
               </TableRow>
             );
           })}
