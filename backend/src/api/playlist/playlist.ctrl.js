@@ -1,16 +1,14 @@
-import reqeust from 'request-promise';
+import youtubeApi from '../../lib/youtube';
 
 const getPlayList = async (ctx) => {
   const { accessToken } = ctx.req.user;
-  const options = {
-    method: 'GET',
-    uri: 'https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true',
-    headers: {
-      Authorization: `Bearer ${ accessToken }`
-    }
-  };
-  const playList = reqeust(options);
-  ctx.body = playList;
+  try {
+    const playList = await youtubeApi.getPlayList(accessToken);
+    console.log(playList);
+    ctx.body = playList;
+  } catch (e) {
+    ctx.throw(e, 403);
+  }
 };
 
 exports.getPlayList = getPlayList;

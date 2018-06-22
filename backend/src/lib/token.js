@@ -56,13 +56,13 @@ const checkToken = async (ctx, next) => {
         maxAge: 1000 * 60 * 60 * 24 * 7
       });
     ctx.req.user = decoded;
-    next();
   } catch (e) {
     // token validate 실패
+    // console.log('token check error', e);
     console.log('token check error');
     ctx.req.user = null;
-    ctx.body = e;
   }
+  await next();
 };
 
 exports.generateToken = generateToken;

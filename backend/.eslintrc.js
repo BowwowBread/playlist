@@ -31,6 +31,7 @@ module.exports = {
     'template-curly-spacing': 0,
     'import/no-extraneous-dependencies': 0,
     'import/first': 0,
-    'require-yield': 0
+    'require-yield': 0,
+    "prefer-arrow-callback": 0
   }
 };

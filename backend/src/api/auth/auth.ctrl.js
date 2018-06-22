@@ -48,21 +48,5 @@ const logout = async (ctx) => {
   ctx.status = 204;
 };
 
-const getUser = (ctx) => {
-  if (!ctx.req.user) {
-    ctx.status = 403;
-    return;
-  }
-  const { name, email, thumbnail } = ctx.req.user;
-
-  const userInfo = {
-    name,
-    email,
-    thumbnail
-  };
-  ctx.body = userInfo;
-};
-
 exports.callback = callback;
 exports.logout = logout;
-exports.getUser = getUser;

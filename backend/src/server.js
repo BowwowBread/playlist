@@ -33,7 +33,21 @@ passport.serializeUser((user, done) => done(null, user));
 passport.deserializeUser((user, done) => done(null, user));
 
 app.keys = ['secret'];
-
+// function delay(ms) {
+//   return new Promise((resolve) => {
+//     setTimeout(resolve, ms);
+//   });
+// }
+// app.use(async (ctx, next) => {
+//   ctx.status = 200;
+//   console.log('Setting status');
+//   await next(); // forgot await!
+// });
+// app.use(async (ctx) => {
+//   await delay(1000); // simulate actual async behavior
+//   console.log('Setting body');
+//   ctx.body = 'Hello from Koa';
+// });
 app
   .use(cors())
   .use(bodyParser())
