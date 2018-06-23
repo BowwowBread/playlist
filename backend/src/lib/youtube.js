@@ -1,5 +1,4 @@
 import request from 'request-promise';
-import axios from 'axios';
 
 const getPlayList = async (accessToken) => {
   const options = {

@@ -2,29 +2,30 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as baseActions from 'store/modules/base';
-import SideMenu from 'components/common/SideMenu';
+import { SideMenu } from 'components/base';
 
 class SideMenuContainer extends Component {
   state ={
 
   };
 
-  toggleMobileSidebar = () => {
+  toggleSidebar = () => {
     const { BaseActions } = this.props;
-    BaseActions.toggleMobileSidebar();
+    BaseActions.toggleSidebar();
   }
   render() {
-    const { mobileSidebar, isLogin } = this.props;
-    const { toggleMobileSidebar } = this;
+    const { isSidebarOpen, isLogin, isPlayerOpen } = this.props;
+    const { toggleSidebar } = this;
     return (
-      <SideMenu isLogin={isLogin} mobileSidebar={mobileSidebar} toggleMobileSidebar={toggleMobileSidebar} />
+      <SideMenu isLogin={isLogin} isSidebarOpen={isSidebarOpen} toggleSidebar={toggleSidebar} isPlayerOpen={isPlayerOpen} />
     );
   }
 }
 
 export default connect(
   state => ({
-    mobileSidebar: state.base.getIn(['mobileSidebar', 'visible']),
+    isSidebarOpen: state.base.get('isSidebarOpen'),
+    isPlayerOpen: state.base.get('isPlayerOpen'),
     isLogin: state.user.get('isLogin'),
   }),
   dispatch => ({

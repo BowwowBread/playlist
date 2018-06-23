@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from 'components/common/layout';
+import { MainLayout } from 'components/layout';
 import MyPlayListContainer from 'containers/list/MyPlayListContainer';
 
 const MyListPage = () => {
   return (
-    <Layout>
+    <MainLayout>
       <MyPlayListContainer />
-    </Layout>
+    </MainLayout>
   );
 };
 

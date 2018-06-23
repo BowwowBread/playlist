@@ -3,7 +3,7 @@ import Cookies from 'universal-cookie';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as playListActions from 'store/modules/playList';
-import MyPlatList from 'components/list/MyPlayList';
+import { MyPlayList } from 'components/list';
 
 class MyPlayListContainer extends Component {
   state = { }
@@ -18,10 +18,12 @@ class MyPlayListContainer extends Component {
     return true;
   }
   render() {
-    const { myPlayList } = this.props;
+    const {
+      myPlayList, pending, success, failure,
+    } = this.props;
     return (
       <div>
-        <MyPlatList myPlayList={myPlayList} />
+        <MyPlayList myPlayList={myPlayList} pending={pending} success={success} failure={failure} />
       </div>
     );
   }
@@ -30,6 +32,9 @@ class MyPlayListContainer extends Component {
 export default connect(
   state => ({
     myPlayList: state.playList.get('myPlayList'),
+    pending: state.pender.pending['list/GET_MY_PLAYLIST'],
+    success: state.pender.success['list/GET_MY_PLAYLIST'],
+    failure: state.pender.failure['list/GET_MY_PLAYLIST'],
   }),
   dispatch => ({
     PlayListActions: bindActionCreators(playListActions, dispatch),

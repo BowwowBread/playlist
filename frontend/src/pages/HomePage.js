@@ -1,12 +1,12 @@
 import React from 'react';
-import Layout from 'components/common/layout';
+import { MainLayout } from 'components/layout';
 import HomeContainer from 'containers/home/HomeContainer';
 
 const MainPage = () => {
   return (
-    <Layout>
+    <MainLayout>
       <HomeContainer />
-    </Layout>
+    </MainLayout>
   );
 };
 

@@ -1,6 +1,4 @@
-import HeaderContainer from 'containers/common/HeaderContainer';
-import SideMenuContainer from 'containers/common/SideMenuContainer';
-import FooterContainer from 'containers/common/FooterContainer';
+import { HeaderContainer, SideMenuContainer } from 'containers/base';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -24,7 +22,7 @@ const styles = theme => ({
   },
 });
 
-const PageLayout = ({ children, classes, theme }) => {
+const MainLayout = ({ children, classes, theme }) => {
   return (
     <div>
       <div className={classes.root}>
@@ -39,4 +37,4 @@ const PageLayout = ({ children, classes, theme }) => {
   );
 };
 
-export default withStyles(styles, { withTheme: true })(PageLayout);
+export default withStyles(styles, { withTheme: true })(MainLayout);

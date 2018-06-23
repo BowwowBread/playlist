@@ -10,7 +10,7 @@ const styles = theme => ({
   },
 });
 
-const GuestMenu = ({ classes }) => {
+const GuestMenu = ({ classes, isPlayerOpen }) => {
   return (
     <div>
       <Divider />
@@ -26,7 +26,7 @@ const GuestMenu = ({ classes }) => {
         </ListItemIcon>
         <ListItemText primary="인기" />
       </ListItem>
-      <ListSubheader component="div">카테고리</ListSubheader>
+      { isPlayerOpen ? <ListSubheader component="div">카테고리</ListSubheader> : null}
       <ListItem button component={NavLink} to="/category/music" activeClassName={classes.active}>
         <ListItemIcon>
           <QueueMusic />
@@ -55,7 +55,7 @@ const GuestMenu = ({ classes }) => {
   );
 };
 
-const UserMenu = ({ classes }) => {
+const UserMenu = ({ classes, isPlayerOpen }) => {
   return (
     <div>
       <Divider />
@@ -71,7 +71,7 @@ const UserMenu = ({ classes }) => {
         </ListItemIcon>
         <ListItemText primary="인기" />
       </ListItem>
-      <ListSubheader component="div">카테고리</ListSubheader>
+      { isPlayerOpen ? <ListSubheader component="div">카테고리</ListSubheader> : null}
       <ListItem button component={NavLink} to="/category/music" activeClassName={classes.active}>
         <ListItemIcon>
           <QueueMusic />
@@ -96,7 +96,7 @@ const UserMenu = ({ classes }) => {
         </ListItemIcon>
         <ListItemText primary="교육" />
       </ListItem>
-      <ListSubheader component="div">내 라이브러리</ListSubheader>
+      { isPlayerOpen ? <ListSubheader component="div">내 라이브러리</ListSubheader> : null }
       <ListItem button component={NavLink} to="/mylist" activeClassName={classes.active}>
         <ListItemIcon>
           <List />

@@ -4,91 +4,141 @@ import {
   Table,
   TableBody,
   TableCell,
-  TableHead,
   TableRow,
   Paper,
-  CardMedia,
-  ExpansionPanel,
-  ExpansionPanelDetails,
-  ExpansionPanelSummary,
+  CircularProgress,
 } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
-    width: '100%',
-    marginTop: theme.spacing.unit * 3,
+    width: '90%',
     overflowX: 'auto',
+    margin: '0 auto',
+    marginTop: theme.spacing.unit * 3,
   },
   table: {
     minWidth: 700,
   },
 });
 
-let id = 0;
-function createData(name, calories, fat, carbs, protein) {
-  id += 1;
-  return {
-    id,
-    name,
-    calories,
-    fat,
-    carbs,
-    protein,
-  };
-}
+const FailurePlayList = ({ classes }) => (
+  <Table className={classes.table}>
 
-const data = [
-  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
-  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
-  createData('Eclair', 262, 16.0, 24, 6.0),
-  createData('Cupcake', 305, 3.7, 67, 4.3),
-  createData('Gingerbread', 356, 16.0, 49, 3.9),
-];
+    <TableBody>
+      <TableRow>
+        <TableCell style={{
+          textAlign: 'center',
+        }}
+        >재생목록을 가져오는데 문제가 발생하였습니다.
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+);
 
-const MyList = ({ classes, myPlayList }) => {
-  return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          <TableRow>
-            <TableCell style={{ textAlign: 'center' }}>앨범</TableCell>
-            <TableCell style={{ textAlign: 'center' }}>제목</TableCell>
-            <TableCell style={{ textAlign: 'center' }}>설명</TableCell>
-            <TableCell style={{ textAlign: 'center' }}>날짜</TableCell>
-          </TableRow>
-        </TableHead>
+const PendingPlaylist = ({ classes, pending }) => (
+  <Table className={classes.table}>
+    <TableBody>
+      <TableRow>
+        <TableCell style={{
+          textAlign: 'center',
+        }}
+        >
+          <CircularProgress
+            size={50}
+          />
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+);
+
+const FetchPlayList = ({ myPlayList, classes }) => (
+  <Table className={classes.table}>
+    {myPlayList.map((playList) => {
+      /* const src = `http://www.youtube.com/embed?listType=playlist&list=${playList.get('id')}&autoplay=1`; */
+      let date = new Date(playList.get('date'));
+      date = date.getFullYear() + '년' + date.getMonth() + '월' + date.getDate() + '일';
+      return (
         <TableBody>
-          {myPlayList.map((playList, index) => {
-            const key = index;
-            const src = `http://www.youtube.com/embed?listType=playlist&list=${playList.get('id')}&autoplay=1`;
-            let date = '';
-            if (playList.get('date') === '') {
-              date = '';
-            } else {
-              date = new Date(playList.get('date'));
-              date = date.getFullYear() + '년' + date.getMonth() + '월' + date.getDate() + '일';
-            }
-            return (
-              <TableRow key={key}>
-                <TableCell style={{ textAlign: 'center' }}>
-                  <iframe
-                    title={playList.title}
-                    width="50%"
-                    height="100%"
-                    src={src}
-                    frameBorder="0"
-                    allowFullScreen
-                  />
-                </TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{playList.get('title')}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{playList.get('description')}</TableCell>
-                <TableCell style={{ textAlign: 'center' }}>{date}</TableCell>
-              </TableRow>
-            );
-          })}
+          <TableRow key={playList.get('id')}>
+            <TableCell style={{
+              textAlign: 'center',
+            }}
+            >
+              <img
+                alt={playList.get('title')}
+                width="50%"
+                height="100%"
+                src={playList.get('thumbnail')}
+                // frameBorder="0"
+                // allowFullScreen
+              />
+            </TableCell>
+            <TableCell style={{
+              textAlign: 'center',
+            }}
+            >{playList.get('title')}
+            </TableCell>
+            <TableCell style={{
+              textAlign: 'center',
+            }}
+            >{playList.get('description')}
+            </TableCell>
+            <TableCell style={{
+              textAlign: 'center',
+            }}
+            >{date}
+            </TableCell>
+          </TableRow>
         </TableBody>
-      </Table>
-    </Paper>
+      );
+    })
+}
+  </Table>
+);
+
+const NotFoundPlayList = ({ classes }) => (
+  <Table className={classes.table}>
+    <TableBody>
+      <TableRow>
+        <TableCell style={{
+          textAlign: 'center',
+        }}
+        >재생목록이 없습니다.
+        </TableCell>
+      </TableRow>
+    </TableBody>
+  </Table>
+);
+
+const SuccessPlayList = ({ myPlayList, classes }) => {
+  return (myPlayList.get(0).get('id') !== ''
+    ? <FetchPlayList myPlayList={myPlayList} classes={classes} />
+    : <NotFoundPlayList classes={classes} />);
+};
+
+const MyList = ({
+  classes, myPlayList, pending, success, failure,
+}) => {
+  return (
+    <div className={classes.root}>
+      {
+        pending
+        ? <PendingPlaylist classes={classes} pending={pending} />
+        : null
+      }
+      {
+        success
+        ? <SuccessPlayList classes={classes} myPlayList={myPlayList} />
+        : null
+      }
+      {
+        failure
+        ? <FailurePlayList classes={classes} />
+        : null
+      }
+    </div>
   );
 };
 

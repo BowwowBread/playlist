@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Header from 'components/common/Header';
+import { Header } from 'components/base';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -20,9 +20,9 @@ class HeaderContainer extends Component {
     this.setState({ anchorEl: null });
   };
 
-  toggleMobileSideBar = () => {
+  toggleSideBar = () => {
     const { BaseActions } = this.props;
-    BaseActions.toggleMobileSidebar();
+    BaseActions.toggleSidebar();
   }
 
   login = () => {
@@ -36,22 +36,22 @@ class HeaderContainer extends Component {
     await UserActions.logout();
     cookies.remove('token');
     this.props.history.push('/');
-    console.log('logout');
   }
   render() {
     const {
-      toggleMobileSideBar, handleMenu, handleClose, login, logout,
+      toggleSideBar, handleMenu, handleClose, login, logout,
     } = this;
     const {
-      userInfo, isLogin, mobileSideBar,
+      userInfo, isLogin, isSidebarOpen, isPlayerOpen,
     } = this.props;
     const { anchorEl } = this.state;
 
     return (
       <div>
         <Header
-          toggleMobileSideBar={toggleMobileSideBar}
-          mobileSideBar={mobileSideBar}
+          isSidebarOpen={isSidebarOpen}
+          isPlayerOpen={isPlayerOpen}
+          toggleSideBar={toggleSideBar}
           handleMenu={handleMenu}
           handleClose={handleClose}
           isLogin={isLogin}
@@ -68,8 +68,9 @@ class HeaderContainer extends Component {
 export default withRouter(connect(
   state => ({
     userInfo: state.user.get('userInfo'),
+    isSidebarOpen: state.base.get('isSidebarOpen'),
+    isPlayerOpen: state.base.get('isPlayerOpen'),
     isLogin: state.user.get('isLogin'),
-    mobileSideBar: state.base.getIn(['mobileSidebar', 'visible']),
   }),
   dispatch => ({
     UserActions: bindActionCreators(userActions, dispatch),

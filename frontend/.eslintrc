@@ -17,6 +17,6 @@
       "no-useless-constructor": 0,
       "max-len": 0,
       "jsx-a11y/anchor-is-valid": 0,
-      "jsx-a11y/alt-text": 0
+      "jsx-a11y/alt-text": 0,
     }
   }
