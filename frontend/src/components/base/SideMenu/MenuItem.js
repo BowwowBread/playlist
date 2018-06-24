@@ -26,7 +26,7 @@ const GuestMenu = ({ classes, isPlayerOpen }) => {
         </ListItemIcon>
         <ListItemText primary="인기" />
       </ListItem>
-      { isPlayerOpen ? <ListSubheader component="div">카테고리</ListSubheader> : null}
+      { !isPlayerOpen ? <ListSubheader component="div">카테고리</ListSubheader> : null}
       <ListItem button component={NavLink} to="/category/music" activeClassName={classes.active}>
         <ListItemIcon>
           <QueueMusic />
@@ -56,6 +56,7 @@ const GuestMenu = ({ classes, isPlayerOpen }) => {
 };
 
 const UserMenu = ({ classes, isPlayerOpen }) => {
+  console.log(isPlayerOpen);
   return (
     <div>
       <Divider />
@@ -71,7 +72,7 @@ const UserMenu = ({ classes, isPlayerOpen }) => {
         </ListItemIcon>
         <ListItemText primary="인기" />
       </ListItem>
-      { isPlayerOpen ? <ListSubheader component="div">카테고리</ListSubheader> : null}
+      { !isPlayerOpen ? <ListSubheader component="div">카테고리</ListSubheader> : null}
       <ListItem button component={NavLink} to="/category/music" activeClassName={classes.active}>
         <ListItemIcon>
           <QueueMusic />
@@ -96,7 +97,7 @@ const UserMenu = ({ classes, isPlayerOpen }) => {
         </ListItemIcon>
         <ListItemText primary="교육" />
       </ListItem>
-      { isPlayerOpen ? <ListSubheader component="div">내 라이브러리</ListSubheader> : null }
+      { !isPlayerOpen ? <ListSubheader component="div">내 라이브러리</ListSubheader> : null }
       <ListItem button component={NavLink} to="/mylist" activeClassName={classes.active}>
         <ListItemIcon>
           <List />
@@ -113,8 +114,8 @@ const UserMenu = ({ classes, isPlayerOpen }) => {
   );
 };
 
-const MenuItem = ({ isLogin, classes }) => {
-  return isLogin ? <UserMenu classes={classes} /> : <GuestMenu classes={classes} />;
+const MenuItem = ({ isLogin, classes, isPlayerOpen }) => {
+  return isLogin ? <UserMenu classes={classes} isPlayerOpen={isPlayerOpen} /> : <GuestMenu classes={classes} isPlayerOpen={isPlayerOpen} />;
 };
 
 export default withStyles(styles)(MenuItem);

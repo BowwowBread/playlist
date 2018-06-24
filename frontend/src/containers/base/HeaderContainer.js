@@ -31,11 +31,11 @@ class HeaderContainer extends Component {
   }
 
   logout = async () => {
-    const { UserActions } = this.props;
+    const { UserActions, history } = this.props;
     const cookies = new Cookies();
     await UserActions.logout();
     cookies.remove('token');
-    this.props.history.push('/');
+    history.push('/');
   }
   render() {
     const {

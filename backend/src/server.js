@@ -50,10 +50,10 @@ app.keys = ['secret'];
 // });
 app
   .use(cors())
-  .use(bodyParser())
   .use(session({}, app))
   .use(passport.initialize())
   .use(passport.session())
+  .use(bodyParser())
   .use(router.routes())
   .use(router.allowedMethods());
 

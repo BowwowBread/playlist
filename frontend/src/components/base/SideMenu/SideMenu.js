@@ -46,7 +46,7 @@ const styles = theme => ({
 });
 
 const FloatMenu = ({
-  isSidebarOpen, toggleSidebar, isLogin, classes,
+  isSidebarOpen, toggleSidebar, isLogin, classes, isPlayerOpen,
 }) => (
   <Drawer
     variant="temporary"
@@ -61,7 +61,7 @@ const FloatMenu = ({
   }}
   >
     <div className={classes.toolbar} />
-    <MenuItem isLogin={isLogin} />
+    <MenuItem isLogin={isLogin} isPlayerOpen={isPlayerOpen} />
   </Drawer>
 );
 
@@ -81,7 +81,7 @@ const MiniMenu = ({
   </Drawer>
 );
 
-const DefaultMenu = ({ classes, isLogin }) => (
+const DefaultMenu = ({ classes, isLogin, isPlayerOpen }) => (
   <Drawer
     variant="permanent"
     open
@@ -90,7 +90,7 @@ const DefaultMenu = ({ classes, isLogin }) => (
   }}
   >
     <div className={classes.toolbar} />
-    <MenuItem isLogin={isLogin} />
+    <MenuItem isLogin={isLogin} isPlayerOpen={isPlayerOpen} />
 
   </Drawer>
 );
@@ -103,7 +103,6 @@ const SideMenu = ({
   classes,
   theme,
 }) => {
-  console.log(isPlayerOpen);
   return (
     <div>
       <Hidden mdUp>
@@ -120,6 +119,7 @@ const SideMenu = ({
           isSidebarOpen={isSidebarOpen}
           toggleSidebar={toggleSidebar}
           classes={classes}
+          isPlayerOpen={isPlayerOpen}
         />
       </Hidden>
       <Hidden smDown implementation="css">
@@ -131,7 +131,7 @@ const SideMenu = ({
             classes={classes}
             isPlayerOpen={isPlayerOpen}
           />
-          : <DefaultMenu isLogin={isLogin} classes={classes} />}
+          : <DefaultMenu isLogin={isLogin} classes={classes} isPlayerOpen={isPlayerOpen} />}
       </Hidden>
     </div>
   );

@@ -8,5 +8,6 @@ const playList = new Router();
 
 playList.get('/', playListCtrl.getAllPlayList);
 playList.get('/me', checkToken, checkAccessToken, playListCtrl.getMyPlayList);
+playList.post('/share', checkToken, playListCtrl.sharePlayList);
 
 module.exports = playList;

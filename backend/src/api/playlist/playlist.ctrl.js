@@ -4,25 +4,51 @@ import PlayList from '../../models/PlayList';
 const getAllPlayList = async (ctx) => {
   const PlayLists = await PlayList.findAll();
   console.log(PlayLists);
-
   ctx.body = PlayLists;
 };
-
+const fetchingPlayList = async (playList) => {
+  const fetchPlayList = await Promise.all(playList.items.map(async (item) => {
+    const { id } = item;
+    const {
+      channelId, channelTitle, description, publishedAt: date, title
+    } = item.snippet;
+    const { url: thumbnail } = item.snippet.thumbnails.default;
+    const fetchMyPlayList = await PlayList.findById(id);
+    if (fetchMyPlayList != null) {
+      return fetchMyPlayList;
+    }
+    return {
+      id,
+      channelId,
+      channelTitle,
+      description,
+      date,
+      title,
+      thumbnail,
+      shared: false,
+      category: []
+    };
+  }));
+  return fetchPlayList;
+};
 const getMyPlayList = async (ctx) => {
   const { accessToken } = ctx.req.user;
-  try {
-    const playList = await youtubeApi.getPlayList(accessToken);
-    ctx.body = playList;
-  } catch (e) {
-    ctx.throw(e, 403);
-  }
+  const playList = await youtubeApi.getPlayList(accessToken);
+  const res = await fetchingPlayList(playList);
+  ctx.body = res;
 };
 
-const uploadPlayList = async (ctx) => {
-  console.log(ctx.req.body);
+const sharePlayList = async (ctx) => {
+  const { playList, selectCategory } = ctx.request.body;
+  const sharedPlayList = await PlayList.share(await Object.assign(playList, {
+    category: selectCategory,
+    shared: true
+  }));
+  console.log(sharedPlayList);
+  ctx.body = sharedPlayList;
+};
 
-  ctx.status = 200;
-}
-
+exports.getAllPlayList = getAllPlayList;
 exports.getMyPlayList = getMyPlayList;
 exports.getAllPlayList = getAllPlayList;
+exports.sharePlayList = sharePlayList;

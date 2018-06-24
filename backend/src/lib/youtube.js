@@ -6,11 +6,12 @@ const getPlayList = async (accessToken) => {
     uri: 'https://www.googleapis.com/youtube/v3/playlists?part=snippet&mine=true',
     headers: {
       Authorization: `Bearer ${ accessToken }`
-    }
+    },
+    json: true
   };
   try {
     const playList = await request(options);
-    console.log(playList);
+    // console.log(playList);
     return playList;
   } catch (e) {
     console.log(e);

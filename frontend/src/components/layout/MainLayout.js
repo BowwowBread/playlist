@@ -1,6 +1,7 @@
 import { HeaderContainer, SideMenuContainer } from 'containers/base';
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
+import { callbackify } from 'util';
 
 const styles = theme => ({
   root: {
@@ -16,7 +17,7 @@ const styles = theme => ({
   content: {
     width: '100%',
     flexGrow: 1,
-    height: '100%',
+    height: 'calc(100vh - 100px)',
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
   },

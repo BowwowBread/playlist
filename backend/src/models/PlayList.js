@@ -9,7 +9,9 @@ const PlayList = new Schema({
   description: String,
   date: Date,
   title: String,
-  thumbnail: String
+  thumbnail: String,
+  shared: Boolean,
+  category: Array,
 });
 
 PlayList.statics.findAll = function () {
@@ -22,12 +24,12 @@ PlayList.statics.findById = function (id) {
     .exec();
 };
 
-PlayList.statics.upload = async function ({
-  id, channelId, channelTitle, description, date, title, thumbnail
+PlayList.statics.share = function ({
+  id, channelId, channelTitle, description, date, title, thumbnail, category, shared
 }) {
   console.log('upload playlist');
   return this.create({
-    id, channelId, channelTitle, description, date, title, thumbnail
+    id, channelId, channelTitle, description, date, title, thumbnail, category, shared
   });
 };
 
