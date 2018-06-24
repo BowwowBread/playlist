@@ -20,12 +20,12 @@ const GuestMenu = ({ classes, isPlayerOpen }) => {
         </ListItemIcon>
         <ListItemText primary="홈" />
       </ListItem>
-      <ListItem button component={NavLink} to="/trend" activeClassName={classes.active}>
+      {/* <ListItem button component={NavLink} to="/trend" activeClassName={classes.active}>
         <ListItemIcon>
           <TrendingUp />
         </ListItemIcon>
         <ListItemText primary="인기" />
-      </ListItem>
+      </ListItem> */}
       { !isPlayerOpen ? <ListSubheader component="div">카테고리</ListSubheader> : null}
       <ListItem button component={NavLink} to="/category/music" onClick={() => location.href('/category/music')} activeClassName={classes.active}>
         <ListItemIcon>
@@ -65,12 +65,12 @@ const UserMenu = ({ classes, isPlayerOpen }) => {
         </ListItemIcon>
         <ListItemText primary="홈" />
       </ListItem>
-      <ListItem button component={NavLink} to="/trend" activeClassName={classes.active}>
+      {/* <ListItem button component={NavLink} to="/trend" activeClassName={classes.active}>
         <ListItemIcon>
           <TrendingUp />
         </ListItemIcon>
         <ListItemText primary="인기" />
-      </ListItem>
+      </ListItem> */}
       { !isPlayerOpen ? <ListSubheader component="div">카테고리</ListSubheader> : null}
       <ListItem button component={NavLink} to="/category/music" onClick={() => location.href('/category/music')} activeClassName={classes.active}>
         <ListItemIcon>
@@ -103,12 +103,12 @@ const UserMenu = ({ classes, isPlayerOpen }) => {
         </ListItemIcon>
         <ListItemText primary="내 재생목록" />
       </ListItem>
-      <ListItem button component={NavLink} to="/like" activeClassName={classes.active}>
+      {/* <ListItem button component={NavLink} to="/like" activeClassName={classes.active}>
         <ListItemIcon>
           <Star />
         </ListItemIcon>
         <ListItemText primary="즐겨찾기" />
-      </ListItem>
+      </ListItem> */}
     </div>
   );
 };
