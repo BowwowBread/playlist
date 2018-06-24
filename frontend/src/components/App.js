@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Helmet } from 'react-helmet';
 import { Switch, Route } from 'react-router-dom';
 import Cookies from 'universal-cookie';
-import { HomePage, MyPlayListPage, PlayerPage } from 'pages';
+import { HomePage, MyPlayListPage, PlayerPage, CategoryPage } from 'pages';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as userActions from 'store/modules/user';
@@ -26,6 +26,7 @@ class App extends Component {
         <Route exact path="/" component={HomePage} />
         <Route path="/mylist" component={MyPlayListPage} />
         <Route path="/player/:id" component={PlayerPage} />
+        <Route path="/category/:category" component={CategoryPage} />
       </div>
     );
   }

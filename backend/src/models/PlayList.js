@@ -27,7 +27,6 @@ PlayList.statics.findById = function (id) {
 PlayList.statics.share = function ({
   id, channelId, channelTitle, description, date, title, thumbnail, category, shared
 }) {
-  console.log('upload playlist');
   return this.create({
     id, channelId, channelTitle, description, date, title, thumbnail, category, shared
   });

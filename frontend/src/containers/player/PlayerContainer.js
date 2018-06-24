@@ -4,19 +4,20 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as playListActions from 'store/modules/playList';
 import * as baseActions from 'store/modules/base';
-
+import { Player } from 'components/player';
+import * as PlayListApi from 'lib/api/playList';
 
 class PlayerContainer extends Component {
-  state = {
-    src: '',
-  };
-  componentWillMount() {
-    const { BaseActions, playerInfo, match } = this.props;
-    BaseActions.togglePlayer();
-    const src = match.params.id;
-    this.setState({
-      src: `http://www.youtube.com/embed?listType=playlist&list=${src}&autoplay=1`,
-    });
+  state = {};
+  async componentWillMount() {
+    const {
+      BaseActions, PlayListActions, playerInfo, match, history,
+    } = this.props;
+    if (playerInfo.get('id') === '') {
+      const newPlayerInfo = await PlayListApi.getPlayList(match.params.id);
+      newPlayerInfo === null ? history.push('/') : PlayListActions.setPlayer(newPlayerInfo);
+      BaseActions.togglePlayer();
+    }
   }
 
   componentWillUnmount() {
@@ -24,19 +25,13 @@ class PlayerContainer extends Component {
     BaseActions.togglePlayer();
   }
   render() {
-    const { src } = this.state;
-    const { playerInfo } = this.props;
+    const { playerInfo, match } = this.props;
     return (
-      <div style={{ height: '100%' }}>
-        <iframe
-          src={src}
-          width="100%"
-          height="100%"
-          title={playerInfo.get('channelTitle')}
-          frameBorder="0"
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-        />
+      <div style={{
+        height: '100%',
+      }}
+      >
+        <Player component="div" id={match.params.id} playerInfo={playerInfo} />
       </div>
     );
   }

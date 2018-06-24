@@ -42,6 +42,15 @@ class MyPlayListContainer extends Component {
 
   sharePlayList = async () => {
     const { selectCategory, selectPlayList } = this.state;
+    const categoryDic = [
+      { 음악: 'music' },
+      { 게임: 'game' },
+      { 유머: 'humor' },
+      { 교육: 'edu' },
+    ];
+    const convertCategory = categoryDic[categoryDic.findIndex((item) => {
+      return item.hasOwnProperty(category);
+    })][category];
     const { PlayListActions } = this.props;
     const token = new Cookies().get('token');
     try {

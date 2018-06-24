@@ -18,6 +18,7 @@ export default handleActions({
     return state.set('isSidebarOpen', !state.get('isSidebarOpen'));
   },
   [TOGGLE_PLAYER]: (state, action) => {
+    console.log(action.payload);
     return state.set('isPlayerOpen', !state.get('isPlayerOpen'));
   },
 }, initialState);

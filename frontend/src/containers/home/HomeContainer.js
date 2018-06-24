@@ -11,7 +11,7 @@ class HomeContainer extends Component {
   async componentDidMount() {
     const { PlayListActions } = this.props;
     const token = new Cookies().get('token');
-    console.log(await PlayListActions.getAllPlayList(token));
+    await PlayListActions.getAllPlayList(token);
   }
 
   handlePlayer = (playList) => {
@@ -24,7 +24,7 @@ class HomeContainer extends Component {
     const { playLists } = this.props;
     const { handlePlayer } = this;
     return (
-      <div>
+      <div style={{ height: '100%' }}>
         <Home playLists={playLists} handlePlayer={handlePlayer} />
       </div>
     );
@@ -33,9 +33,9 @@ class HomeContainer extends Component {
 
 export default withRouter(connect(state => ({
   playLists: state.playList.get('playLists'),
-  pending: state.pender.pending['list/GET_MY_PLAYLIST'],
-  success: state.pender.success['list/GET_MY_PLAYLIST'],
-  failure: state.pender.failure['list/GET_MY_PLAYLIST'],
+  pending: state.pender.pending['list/GET_ALL_PLAYLIST'],
+  success: state.pender.success['list/GET_ALL_PLAYLIST'],
+  failure: state.pender.failure['list/GET_ALL_PLAYLIST'],
 }), dispatch => ({
   PlayListActions: bindActionCreators(playListActions, dispatch),
 }))(HomeContainer));

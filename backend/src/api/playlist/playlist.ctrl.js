@@ -2,10 +2,16 @@ import youtubeApi from '../../lib/youtube';
 import PlayList from '../../models/PlayList';
 
 const getAllPlayList = async (ctx) => {
-  const PlayLists = await PlayList.findAll();
-  console.log(PlayLists);
-  ctx.body = PlayLists;
+  const playLists = await PlayList.findAll();
+  ctx.body = playLists;
 };
+
+const getPlayList = async (ctx) => {
+  const { id } = ctx.params;
+  const playList = await PlayList.findById(id);
+  ctx.body = playList;
+};
+
 const fetchingPlayList = async (playList) => {
   const fetchPlayList = await Promise.all(playList.items.map(async (item) => {
     const { id } = item;
@@ -44,10 +50,10 @@ const sharePlayList = async (ctx) => {
     category: selectCategory,
     shared: true
   }));
-  console.log(sharedPlayList);
   ctx.body = sharedPlayList;
 };
 
+exports.getPlayList = getPlayList;
 exports.getAllPlayList = getAllPlayList;
 exports.getMyPlayList = getMyPlayList;
 exports.getAllPlayList = getAllPlayList;

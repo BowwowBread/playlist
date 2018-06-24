@@ -26,7 +26,6 @@ User.statics.findByName = function (name) {
 User.statics.updateUser = function ({
   name, email, thumbnail, accessToken,
 }) {
-  console.log('update');
   return this.findOneAndUpdate({ email }, {
     $set: {
       name,
@@ -39,7 +38,6 @@ User.statics.updateUser = function ({
 User.statics.signUp = async function ({
   name, email, thumbnail, accessToken, refreshToken,
 }) {
-  console.log('sign up');
   return this.create({
     name, email, thumbnail, accessToken, refreshToken
   });

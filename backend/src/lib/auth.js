@@ -54,7 +54,6 @@ const refreshingAccessToken = async (refreshToken) => {
   };
   try {
     const refreshAccessToken = await request(options);
-    console.log(refreshAccessToken.access_token);
     return refreshAccessToken.access_token;
   } catch (e) {
     return e;

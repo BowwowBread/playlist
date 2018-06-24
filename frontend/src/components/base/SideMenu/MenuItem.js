@@ -27,25 +27,25 @@ const GuestMenu = ({ classes, isPlayerOpen }) => {
         <ListItemText primary="인기" />
       </ListItem>
       { !isPlayerOpen ? <ListSubheader component="div">카테고리</ListSubheader> : null}
-      <ListItem button component={NavLink} to="/category/music" activeClassName={classes.active}>
+      <ListItem button component={NavLink} to="/category/music" onClick={() => location.href('/category/music')} activeClassName={classes.active}>
         <ListItemIcon>
           <QueueMusic />
         </ListItemIcon>
         <ListItemText primary="음악" />
       </ListItem>
-      <ListItem button component={NavLink} to="/category/game" activeClassName={classes.active}>
+      <ListItem button component={NavLink} to="/category/game" onClick={() => location.href('/category/game')} activeClassName={classes.active}>
         <ListItemIcon>
           <Games />
         </ListItemIcon>
         <ListItemText primary="게임" />
       </ListItem>
-      <ListItem button component={NavLink} to="/category/humor" activeClassName={classes.active}>
+      <ListItem button component={NavLink} to="/category/humor" onClick={() => location.href('/category/humor')} activeClassName={classes.active}>
         <ListItemIcon>
           <ChildCare />
         </ListItemIcon>
         <ListItemText primary="유머" />
       </ListItem>
-      <ListItem button component={NavLink} to="/category/edu" activeClassName={classes.active}>
+      <ListItem button component={NavLink} to="/category/edu" onClick={() => location.href('/category/edu')} activeClassName={classes.active}>
         <ListItemIcon>
           <AccountBalance />
         </ListItemIcon>
@@ -56,7 +56,6 @@ const GuestMenu = ({ classes, isPlayerOpen }) => {
 };
 
 const UserMenu = ({ classes, isPlayerOpen }) => {
-  console.log(isPlayerOpen);
   return (
     <div>
       <Divider />
@@ -73,25 +72,25 @@ const UserMenu = ({ classes, isPlayerOpen }) => {
         <ListItemText primary="인기" />
       </ListItem>
       { !isPlayerOpen ? <ListSubheader component="div">카테고리</ListSubheader> : null}
-      <ListItem button component={NavLink} to="/category/music" activeClassName={classes.active}>
+      <ListItem button component={NavLink} to="/category/music" onClick={() => location.href('/category/music')} activeClassName={classes.active}>
         <ListItemIcon>
           <QueueMusic />
         </ListItemIcon>
         <ListItemText primary="음악" />
       </ListItem>
-      <ListItem button component={NavLink} to="/category/game" activeClassName={classes.active}>
+      <ListItem button component={NavLink} to="/category/game" onClick={() => location.href('/category/game')} activeClassName={classes.active}>
         <ListItemIcon>
           <Games />
         </ListItemIcon>
         <ListItemText primary="게임" />
       </ListItem>
-      <ListItem button component={NavLink} to="/category/humor" activeClassName={classes.active}>
+      <ListItem button component={NavLink} to="/category/humor" onClick={() => location.href('/category/humor')} activeClassName={classes.active}>
         <ListItemIcon>
           <ChildCare />
         </ListItemIcon>
         <ListItemText primary="유머" />
       </ListItem>
-      <ListItem button component={NavLink} to="/category/edu" activeClassName={classes.active}>
+      <ListItem button component={NavLink} to="/category/edu" onClick={() => location.href('/category/edu')} activeClassName={classes.active}>
         <ListItemIcon>
           <AccountBalance />
         </ListItemIcon>

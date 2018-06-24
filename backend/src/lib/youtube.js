@@ -11,10 +11,8 @@ const getPlayList = async (accessToken) => {
   };
   try {
     const playList = await request(options);
-    // console.log(playList);
     return playList;
   } catch (e) {
-    console.log(e);
     return JSON.parse(e.response.body).error.message;
   }
 };

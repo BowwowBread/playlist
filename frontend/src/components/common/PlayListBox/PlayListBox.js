@@ -5,28 +5,40 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   title: {
-    color: theme.palette.primary.light,
+    color: 'white',
   },
   titleBar: {
-    background:
-      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
+    background: 'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 1' +
+        '00%)',
   },
 });
 const PlayListBox = ({ playList, classes, handlePlayer }) => {
   return (
-    <GridListTile key={playList.get('id')} style={{ cursor: 'pointer' }} onClick={() => handlePlayer(playList.toJS())}>
-      <img src={playList.get('thumbnail')} alt={playList.get('title')} />
+    <GridListTile
+      key={playList.get('id')}
+      style={{
+      height: '200px',
+      width: '250px',
+      marginRight: '30px',
+    }}
+    >
+
+      <img
+        src={playList.get('thumbnail')}
+        alt={playList.get('title')}
+        style={{
+        cursor: 'pointer',
+      }}
+        onClick={() => handlePlayer(playList.toJS())}
+      />
+
       <GridListTileBar
         title={playList.get('title')}
-        classes={{
-                root: classes.titleBar,
-                title: classes.title,
-              }}
+        subtitle={<span > by : { playList.get('channelTitle')}</span>}
         actionIcon={
-          <IconButton>
+          <IconButton className={classes.icon} >
             <StarBorder className={classes.title} />
-          </IconButton>
-              }
+          </IconButton>}
       />
     </GridListTile>
   );
