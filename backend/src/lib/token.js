@@ -56,8 +56,6 @@ const checkToken = async (ctx, next) => {
     ctx.req.user = userInfo;
   } catch (e) {
     // token validate 실패
-    console.log('token check error');
-
     ctx.req.user = null;
     ctx.body = 'not found token';
   }

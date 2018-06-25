@@ -4,8 +4,8 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "NODE_PATH=src node src",
-    "dev": "NODE_PATH=src nodemon --watch src/ src/index.ts"
+    "test": "node index.js",
+    "dev": "nodemon --watch src/ src/index.js"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -27,6 +27,7 @@
     "jsonwebtoken": "^8.3.0",
     "koa": "^2.5.1",
     "koa-bodyparser": "^4.2.1",
+    "koa-cors": "0.0.16",
     "koa-passport": "^4.1.0",
     "koa-router": "^7.4.0",
     "koa-session": "^5.8.1",

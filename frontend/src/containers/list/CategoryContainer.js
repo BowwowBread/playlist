@@ -35,7 +35,6 @@ class CategoryContainer extends Component {
   render() {
     const { playLists, category } = this.props;
     const { handlePlayer } = this;
-    console.log(playLists);
     return (
       <div>
         <CategoryList playLists={playLists} category={category} handlePlayer={handlePlayer} />

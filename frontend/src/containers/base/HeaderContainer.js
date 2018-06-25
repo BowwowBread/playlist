@@ -33,8 +33,8 @@ class HeaderContainer extends Component {
   logout = async () => {
     const { UserActions, history } = this.props;
     const cookies = new Cookies();
-    await UserActions.logout();
     cookies.remove('token');
+    await UserActions.logout();
     history.push('/');
   }
   render() {
